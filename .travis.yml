@@ -1,20 +1,19 @@
-addons:
-  code_climate:
-    repo_token:
-      secure: "xrwDBswA1orxGSeZdQLdZKnB2P8FgkmzOaaKfFExwKFXeqLYN0qV7WlEwQGupxxw90eCdGl02csWkBB7f1ZSsjy8ANhX3K9MduiGX/0suWZJ0IaonK4aeYXIJgVoyqPw+HBFqQcmheOupvykOYVF2oxD3/wvqlODqxuSxwXGp+07oLJy7IbRxDJFAc9rr40rq311aNxaROzcfpD/SSlrCHz1f4mtZWOMxpuW3lZ28fP1e/3zyg+Q+Hn89YaZa89TRAQLXSPwvfFojgcNFyek2jlUvO/9x+wD4FzSBmMU5t3SgDREChoN1LTtBtKtMKXRQcBolEBVun3jVakWC3bEFFa7hdRe6BeNjfXoKHt1VqqScuYOYcIyCzKmH1wNyMIJomUuRxL3imTjOSvAmzvsmVD616bsJQTtx5bsymo8Wd8s2h3Ne7SDzhNzlIG0d2oiUDFh9OIJ4Hd8mk5/K4c1NrJbVpVyzG6oQCftxO/7+lEjEe92qLOelp7oIe0b9bwSONuPGR5Or7HbmTOaZxOsxSdIShOAcR1oPUlXrIZf+DxMsma4umMQmOAgW+Jd7jeT+s20m+ywwYe+vFAPdh80d6WqmYmI9nEh+x55hgzaC+cYyhpXhXNR56ujQ92Vo364ACgsOJ1EkKD+/7YjsX79zrYd0fvNldbdMcfn6K+gC/4="
 rvm:
-  - 2.0.0
-  - 2.1
-  - 2.2
-  - ruby-head
-  - rbx-2
+- 2.0.0
+- 2.1
+- 2.2
+- ruby-head
+- rbx-2
 matrix:
   allow_failures:
-    - rvm: jruby-head
-    - rvm: rbx-2
-    - rvm: ruby-head
+  - rvm: jruby-head
+  - rvm: rbx-2
+  - rvm: ruby-head
   include:
-    - rvm: jruby
-      env: JRUBY_OPTS="--2.0"
-    - rvm: jruby-head
-      env: JRUBY_OPTS="--2.1"
+  - rvm: jruby
+    env: JRUBY_OPTS="--2.0"
+  - rvm: jruby-head
+    env: JRUBY_OPTS="--2.1"
+env:
+  global:
+    secure: EXFzGCqzWdi4KrYvtK2L+TFtpV42t8xQTdFCLIAQIxZJBH+0jNR0ylGE3MTEzNOa/LmWGFroqGY1vV6h/Mopb6FF+F2xeaq8zdzKICjaAnxJA4bELqjyMrKvSJHs4F1KxoJgh2JbNrhHVuL8F6ZUni5MfxOwd1gMHq2Tpgl13wsKOfv2zoI8cSULbMZr4Nqaxm6YBW+T5y+OMRmF4+NqxFBkQFwhOJm1e2O8St4dPD4SngFF/sETLxrDvc9eR7WKZ0PZvsMUjTjbXmp4eV3H/SSTCdwS70e3nEm4nFSNRLLgnP71AnXA1qANH6Q2gh0Tp6OiBlvzVbFxPekO5X4FQZkYcuIMeiDwXDcfVlo8gMAYi/eZfgzYM/9zkLIQS+Zs0nplr66Nt7AIcPIySwCtblnyQLiaMFli9C3BEwqthtzWmVQkhb5A9klLDtTHZIsULij1jF7nP8SdMXUOdLwElLaDVxdEvN8J1Sl3fDNdfvZh3Lw+VPMSfxy0LZ8o/rMh2A10SIAJAVQ+nzwDfg8hoJK8O7jS0ljoUoFJ8V6J6K7EeIJgCCaCZAjZpZ5Ca1SptFw8pVmy0SFAcxJ39Jw7o+BqXK8zhmd4NgNV5G7wkrQBm/dllz2Znm5jvooz42zOoi750cQk/PVB9aitwGnBTzYJwzO8ZxSyw8FKNZmZw8g=
