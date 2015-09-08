@@ -5,8 +5,10 @@ require 'lean-attributes/attributes/initializer'
 module Lean
   module Attributes
     def self.included(base)
-      base.extend(ClassMethods)
-      base.include(Coercion)
+      base.class_eval do
+        extend ClassMethods
+        include Coercion
+      end
     end
   end
 end
