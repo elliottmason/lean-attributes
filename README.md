@@ -6,4 +6,4 @@
 [![Test Coverage](https://codeclimate.com/github/lleolin/lean-attributes/badges/coverage.svg)](https://codeclimate.com/github/lleolin/lean-attributes/coverage)
 [![Code Climate](https://codeclimate.com/github/lleolin/lean-attributes/badges/gpa.svg)](https://codeclimate.com/github/lleolin/lean-attributes)
 [![Dependency Status](https://gemnasium.com/lleolin/lean-attributes.svg)](https://gemnasium.com/lleolin/lean-attributes)
-[![Inline docs](http://inch-ci.org/github/lotus/model.svg?branch=master)](http://inch-ci.org/github/lleolin/lean-attributes)
+[![Inline docs](http://inch-ci.org/github/lleolin/lean-attributes.svg?branch=master)](http://inch-ci.org/github/lleolin/lean-attributes)
