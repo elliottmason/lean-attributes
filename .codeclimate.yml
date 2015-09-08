@@ -17,14 +17,8 @@ engines:
 # to turn off an engine, set enabled to `false` or remove it
   rubocop:
     enabled: true
-  golint:
-    enabled: false
-  gofmt:
-    enabled: false
-  eslint:
-    enabled: false
-  csslint:
-    enabled: false
+  bundler-audit:
+    enabled: true
 
 # Engines can analyze files and report issues on them, but you can separately
 # decide which files will receive ratings based on those issues. This is
@@ -33,12 +27,9 @@ engines:
 # For more details see here:
 # http://docs.codeclimate.com/article/289-configuring-your-repository-via-codeclimate-yml#platform
 
-# ratings:
-#   paths:
-#   - app/**
-#   - lib/**
-#   - "**.rb"
-#   - "**.go"
+ratings:
+  paths:
+    - lib/**
 
 # You can globally exclude files from being analyzed by any engine using the
 # exclude_paths key.
