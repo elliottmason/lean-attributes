@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+ruby '2.1.2'
+
+gem 'attrio',           '0.7.3'
+gem 'benchmark-ips',    '2.0.0'
+gem 'fast_attributes',  '0.7.0'
+gem 'lean-attributes',  path: './..'
+gem 'virtus',           '1.0.5'
