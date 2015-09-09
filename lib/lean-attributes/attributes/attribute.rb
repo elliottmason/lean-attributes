@@ -5,9 +5,9 @@ module Lean
 
       def initialize(options = {})
         @default_value  = options[:default_value]
-        @name           = options[:name]
+        @name           = options[:name].to_sym
         @parent_class   = options[:parent_class]
-        @type           = options[:type].to_s
+        @type           = options[:type].to_s.to_sym
       end
 
       def coercion_method
@@ -25,12 +25,13 @@ module Lean
       end
 
       def coercion_method_name(from = nil)
-        ['coerce', from, 'to', @type.downcase].compact.join('_')
+        ['coerce', from, 'to', @type.to_s.downcase].compact.join('_')
       end
 
       def default_value
-        return "send(:#{@default_value})" if @default_value.is_a?(Symbol) &&
-                                             !@type.is_a?(Symbol)
+        if @default_value.is_a?(Symbol) && @type != :Symbol
+          return "send(:#{@default_value})"
+        end
 
         @default_value.inspect
       end
@@ -49,10 +50,6 @@ module Lean
         EOS
       end
 
-      def name
-        @name.to_sym
-      end
-
       def setter_method
         <<-EOS
           def #{name}=(value)
@@ -65,14 +62,8 @@ module Lean
       def setter_method_coercion
         return unless coercible?
 
-        <<-EOS
-          value = #{coercion_method_name}(value) unless value.is_a?(#{@type})
-        EOS
+        "value = #{coercion_method_name}(value) unless value.is_a?(#{@type})"
       end
-
-      # def type_coercion_method_name
-      #   @type_coercion_method_name ||= :"coerce_to_#{@type.downcase}"
-      # end
     end
   end
 end

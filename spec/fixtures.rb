@@ -28,8 +28,9 @@ end
 class ReadingProgress
   include Lean::Attributes
 
-  attribute :date, Time,    default: :time_now
-  attribute :page, Integer, default: 1
+  attribute :date,    Time,    default: :time_now
+  attribute :page,    Integer, default: 1
+  attribute :status,  Symbol,  default: :unread
 
   def time_now
     Time.new('2015-09-08').utc

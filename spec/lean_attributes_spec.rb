@@ -44,5 +44,6 @@ describe 'Lean::Attributes' do
 
     it { expect(reading_progress.page).to eq 1 }
     it { expect(reading_progress.date).to be_kind_of Time }
+    it { expect(reading_progress.status).to eq :unread }
   end
 end
