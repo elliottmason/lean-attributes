@@ -1,6 +1,6 @@
 module Lean
   module Attributes
-    module Coercion
+    module CoercionHelpers
       def coerce_to_array(value)
         Array(value) unless value.nil?
       end
