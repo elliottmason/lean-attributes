@@ -6,7 +6,6 @@ require 'lean-attributes/version'
 Gem::Specification.new do |s|
   s.name = 'lean-attributes'
   s.version = Lean::Attributes::VERSION
-  s.version = "#{s.version}-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
 
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.3'
@@ -17,7 +16,7 @@ Gem::Specification.new do |s|
   s.email = ['r.elliott.mason@fastmail.fm']
   s.summary = 'Lean attributes for Ruby classes'
   s.description = <<-desc
-lean-attributes allows you to define coerced attributes for Ruby classes
+lean-attributes allows you to define typed attributes for Ruby classes
 desc
 
   s.licenses = ['MIT']
