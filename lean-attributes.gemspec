@@ -6,6 +6,7 @@ require 'lean-attributes/version'
 Gem::Specification.new do |s|
   s.name = 'lean-attributes'
   s.version = Lean::Attributes::VERSION
+  s.version = "#{s.version}-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
 
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.3'
@@ -21,8 +22,8 @@ desc
 
   s.licenses = ['MIT']
 
-  s.files = `git ls-files -- {bin,lib}/*`.split("\n") +
-    %w(LICENSE README.md)
+  s.files = `git ls-files -z -- lib/* bin/* LICENSE.md README.md \
+    CHANGELOG.md FEATURES.md lean-attributes.gemspec`.split("\x0")
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.extra_rdoc_files = ['README.md']
   s.require_paths = ['lib']
