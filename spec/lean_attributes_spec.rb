@@ -19,12 +19,36 @@ describe 'Lean::Attributes' do
   it { expect(author.age).to be_nil }
   it { expect(author.name).to match 'Leo Tolstoy' }
 
+  describe '#attributes' do
+    it do
+      expect(book.attributes).to match(
+        authors:    ['Leo Tolstoy'],
+        edition:    'first',
+        finished:   DateTime.parse('2015-09-10'),
+        format:     :paperback,
+        pages:      1,
+        price:      BigDecimal.new(10, 0),
+        published:  Date.parse('1869-01-01'),
+        rate:       nil,
+        sold:       Time.new('2015-09-08'),
+        title:      'War and Peace'
+      )
+    end
+  end
+
   context 'attributes have defaults' do
     let(:reading_progress) { ReadingProgress.new(page: nil) }
 
     it { expect(reading_progress.date).to be_kind_of Time }
     it { expect(reading_progress.page).to eq 1 }
     it { expect(reading_progress.status).to eq :unread }
+  end
+
+  context 'initialized with unknown attributes' do
+    it 'discards them' do
+      expect { ReadingProgress.new(nonexistent_attribute: true) } \
+        .to_not raise_error
+    end
   end
 
   describe 'Lean::Attributes::Basic' do
