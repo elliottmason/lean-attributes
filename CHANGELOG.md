@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0] - 2015-09-09
 ### Changed
-- Makes calls to coerce\_<attribute>\_to\_<type> unconditional when setting an attribute
+- Makes calls to `coerce_<attribute>_to_<type>` unconditional when setting an attribute
 - Lean::Attributes::Coercion is now Lean::Attributes::CoercionHelpers
 
 ## [0.0.2] - 2015-09-09 [YANKED]
