@@ -44,13 +44,6 @@ describe 'Lean::Attributes' do
     it { expect(reading_progress.status).to eq :unread }
   end
 
-  context 'initialized with unknown attributes' do
-    it 'discards them' do
-      expect { ReadingProgress.new(nonexistent_attribute: true) } \
-        .to_not raise_error
-    end
-  end
-
   describe 'Lean::Attributes::Basic' do
     it 'has no initializer'  do
       expect { Book.new(title: 'War and Peace') }.to raise_error(ArgumentError)
