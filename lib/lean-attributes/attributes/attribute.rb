@@ -1,5 +1,11 @@
 module Lean
   module Attributes
+    # Represents a defined attribute
+    #
+    # @since 0.0.1
+    # @api private
+    #
+    # @see Lean::Attributes::ClassMethods#attribute
     class Attribute
       attr_reader :name
 

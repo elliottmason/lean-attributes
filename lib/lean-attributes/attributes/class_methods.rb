@@ -2,6 +2,10 @@ require 'lean-attributes/attributes/attribute'
 
 module Lean
   module Attributes
+    # Methods that extend classes that include {Lean::Attributes}
+    #
+    # @since 0.0.1
+    # @api private
     module ClassMethods
       def attribute(name, type, options = {})
         attribute = Attribute.new(
