@@ -15,7 +15,7 @@ module Lean
     # inclusive class with coercion or initialization methods. You may mean to
     # use {Lean::Attributes}.
     #
-    # @since 0.0.1
+    # @since 0.1.0
     #
     # @see Lean::Attributes
     # @see Lean::Attributes::ClassMethods

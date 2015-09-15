@@ -8,14 +8,17 @@ module Lean
     #
     # @see Lean::Attributes::ClassMethods#attribute
     class Attribute
+      # @return [Symbol] name of the Attribute
       attr_reader :name
-
-      # @!attribute [r] name
-      #   @return [Symbol] name of the {Attribute Attribute}
 
       # Description of method
       #
       # @param [Hash] options = {} describe options = {}
+      # @option options [Object] :default default value or method name as a
+      #   Symbol
+      # @option options [#to_sym] :name attribute name
+      # @option options [#to_s] :type class or class name that the attribute
+      #   will be
       # @return [Attribute] description of returned object
       #
       # @see Lean::Attributes::ClassMethods#attribute
@@ -44,8 +47,8 @@ module Lean
       # Generates a method with a name `coerce\_to\_<type>`, or
       # `coerce\_<attribute>\_to\_<type>` if an argument is provided.
       #
-      # @param [#to_s] from = nil describe from = nil
-      # @return [String] description of returned object
+      # @param [#to_s] from {#name name} of the attribute being coerced
+      # @return [String] method name
       #
       # @see #coercion_method
       def coercion_method_name(from = nil)
@@ -58,6 +61,8 @@ module Lean
       # String.
       #
       # @return [Object] configured default
+      #
+      # @since 0.1.0
       #
       # @see #getter_method_with_default
       def default
@@ -131,15 +136,15 @@ module Lean
       # configured type if necessary.
       #
       # @example
-      #   class Post
+      #   class Book
       #     include Lean::Attributes
       #
-      #     attribute :replies_count, Integer
+      #     attribute :pages, Integer
       #
       #     # generated method
-      #     def replies_count=(value)
-      #       value = coerce_replies_count_to_integer(value) unless value.is_a?(Integer)
-      #       @replies_count = value
+      #     def pages=(value)
+      #       value = coerce_pages_to_integer(value) unless value.is_a?(Integer)
+      #       @pages = value
       #     end
       #   end
       #
