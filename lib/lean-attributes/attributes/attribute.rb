@@ -1,6 +1,7 @@
 module Lean
   module Attributes
-    # Represents a defined attribute
+    # Represents an attribute defined by
+    # {Lean::Attributes::ClassMethods#attribute}
     #
     # @since 0.0.1
     # @api private
@@ -8,6 +9,9 @@ module Lean
     # @see Lean::Attributes::ClassMethods#attribute
     class Attribute
       attr_reader :name
+
+      # @!attribute [r] name
+      #   @return [Symbol] name of the {Attribute Attribute}
 
       # Description of method
       #
@@ -22,9 +26,9 @@ module Lean
       end
 
       # Generates a method definition as a String with the name
-      # `coerce\_<attribute>\_to\_<type>` that calls another generated method with
-      # the name `coerce\_to\_<type>`. This method gets appended to the class that
-      # defined this {Attribute Attribute}.
+      # `coerce\_<attribute>\_to\_<type>` that calls another generated method
+      # with the name `coerce\_to\_<type>`. This method gets appended to the
+      # class that defined this {Attribute Attribute}.
       #
       # @return [String] method definition
       #
@@ -40,7 +44,7 @@ module Lean
       # Generates a method with a name `coerce\_to\_<type>`, or
       # `coerce\_<attribute>\_to\_<type>` if an argument is provided.
       #
-      # @param [Object#to_s] from = nil describe from = nil
+      # @param [#to_s] from = nil describe from = nil
       # @return [String] description of returned object
       #
       # @see #coercion_method
@@ -67,6 +71,22 @@ module Lean
       # Generates a getter method definition if the Attribute has a default,
       # or we just use the straightforward `attr_reader :attribute_name`.
       #
+      # @example
+      #   class Post
+      #     include Lean::Attributes
+      #
+      #     attribute :author,        String
+      #     attribute :replies_count, Integer, default: 0
+      #
+      #     # generated attr_reader
+      #     attr_reader :author
+      #
+      #     # generated getter with default
+      #     def replies_count
+      #       @replies_count ||= 0
+      #     end
+      #   end
+      #
       # @return [String] description of returned object
       #
       # @see #getter_method_with_default
@@ -77,6 +97,23 @@ module Lean
       end
 
       # Generates a getter method definition that lazily sets a default.
+      #
+      # @example
+      #   class Post
+      #     include Lean::Attributes
+      #
+      #     attribute :created_at,    Time,     default: :default_created_at
+      #     attribute :replies_count, Integer,  default: 0
+      #
+      #     # generated methods
+      #     def created_at
+      #       @first_name ||= send(:default_created_at)
+      #     end
+      #
+      #     def replies_count
+      #       @replies_count ||= 0
+      #     end
+      #   end
       #
       # @return [String] method definition that sets default
       #
@@ -93,7 +130,20 @@ module Lean
       # Generates a setter method definition that coerces values to the
       # configured type if necessary.
       #
-      # @return [String] method definition that sets an attribute
+      # @example
+      #   class Post
+      #     include Lean::Attributes
+      #
+      #     attribute :replies_count, Integer
+      #
+      #     # generated method
+      #     def replies_count=(value)
+      #       value = coerce_replies_count_to_integer(value) unless value.is_a?(Integer)
+      #       @replies_count = value
+      #     end
+      #   end
+      #
+      # @return [String] method definition
       def setter_method
         <<-EOS
           def #{name}=(value)
