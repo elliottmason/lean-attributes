@@ -5,8 +5,16 @@ module Lean
     # Methods that extend classes that include {Lean::Attributes}
     #
     # @since 0.0.1
-    # @api private
+    # @api public
     module ClassMethods
+      # Defines a new attribute. Adds getter and setter methods to the class.
+      #
+      # @param [Symbol] name describe name
+      # @param [Class,String,Symbol] type describe type
+      # @param [Hash] options
+      # @option options [Object] :default default value or method name to call
+      #   as a Symbol
+      # @return [Attribute] configured Attribute
       def attribute(name, type, options = {})
         attribute = Attribute.new(
           default:  options[:default],
@@ -23,6 +31,10 @@ module Lean
         attribute
       end
 
+      # @return [Array<Symbol>] names of defined attributes
+      #
+      # @since 0.1.1
+      # @api private
       def defined_attributes
         return @defined_attributes if @defined_attributes
 

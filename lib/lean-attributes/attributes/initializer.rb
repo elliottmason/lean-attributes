@@ -4,15 +4,12 @@ module Lean
     # Hash keys-values
     #
     # @since 0.0.1
+    # @api public
     module Initializer
-      # Description of method
+      # Assigns Hash values to attributes based on key names
       #
-      # @param [Hash] attributes = {} attributes with which to set on the
-      # instance
-      # @return [Object]
-      #
-      # @since 0.0.1
-      # @api public
+      # @param [Hash] attributes
+      # @return [Object] instance of inclusive class with attributes set
       def initialize(attributes = {})
         attributes.each do |name, value|
           send(:"#{name}=", value)

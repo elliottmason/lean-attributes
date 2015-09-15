@@ -29,8 +29,8 @@ module Lean
       end
 
       # Generates a method definition as a String with the name
-      # `coerce\_<attribute>\_to\_<type>` that calls another generated method
-      # with the name `coerce\_to\_<type>`. This method gets appended to the
+      # `coerce_<attribute>_to_<type>` that calls another generated method
+      # with the name `coerce_to_<type>`. This method gets appended to the
       # class that defined this {Attribute Attribute}.
       #
       # @return [String] method definition
@@ -44,10 +44,11 @@ module Lean
         EOS
       end
 
-      # Generates a method with a name `coerce\_to\_<type>`, or
-      # `coerce\_<attribute>\_to\_<type>` if an argument is provided.
+      # Generates a method with a name `coerce_to_<type>`, or
+      # `coerce_<attribute>_to_<type>` if an argument is provided.
       #
-      # @param [#to_s] from {#name name} of the attribute being coerced
+      # @param [#to_s] from {Lean::Attributes::Attribute#name name} of the
+      #   attribute being coerced
       # @return [String] method name
       #
       # @see #coercion_method
