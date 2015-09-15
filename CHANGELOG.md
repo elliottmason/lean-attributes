@@ -4,8 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Added
+- Adds comprehensive YARD documentation
 - Adds .defined_attributes method to return an array of a class's attribute names
 - Adds #attributes method to return attribute values as a hash
+
+### Fixed
+- Fixes a bug where Time attributes would be improperly parsed to January 1st
 
 ## [0.1.0] - 2015-09-09
 ### Changed

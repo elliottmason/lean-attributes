@@ -30,7 +30,7 @@ describe 'Lean::Attributes' do
         price:      BigDecimal.new(10, 0),
         published:  Date.parse('1869-01-01'),
         rate:       nil,
-        sold:       Time.new('2015-09-08'),
+        sold:       Time.parse('2015-09-08'),
         title:      'War and Peace'
       )
     end
@@ -57,8 +57,8 @@ describe 'Lean::Attributes' do
       expect(book.pages).to eq 1
       expect(book.price).to be_kind_of BigDecimal
       expect(book.price).to eq 10.00
-      expect(book.published).to eq Date.parse('1869-01-01')
-      expect(book.sold).to eq Time.new('2015-09-08')
+      expect(book.published.strftime('%Y-%m-%d')).to eq '1869-01-01'
+      expect(book.sold.strftime('%Y-%m-%d')).to eq '2015-09-08'
       expect(book.title).to match 'War and Peace'
     end
   end

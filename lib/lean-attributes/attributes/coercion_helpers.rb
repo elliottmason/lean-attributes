@@ -30,7 +30,7 @@ module Lean
       end
 
       def coerce_to_time(value)
-        Time.new(value) unless value.nil?
+        Time.parse(value) unless value.nil?
       end
     end
   end
