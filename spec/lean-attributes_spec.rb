@@ -19,8 +19,17 @@ describe 'Lean::Attributes' do
   it { expect(author.age).to be_nil }
   it { expect(author.name).to match 'Leo Tolstoy' }
 
+  it { expect(book).to respond_to :coerce_authors }
+  it { expect(author).to respond_to :coerce_age }
+
+  describe 'generated methods' do
+    it { expect(author).to respond_to :age }
+    it { expect(author).to respond_to :age= }
+    it { expect(author).to respond_to :coerce_age }
+  end
+
   describe '#attributes' do
-    it do
+    it 'returns all attributes as a Hash' do
       expect(book.attributes).to match(
         authors:    ['Leo Tolstoy'],
         edition:    'first',
@@ -30,7 +39,7 @@ describe 'Lean::Attributes' do
         price:      BigDecimal.new(10, 0),
         published:  Date.parse('1869-01-01'),
         rate:       nil,
-        sold:       Time.parse('2015-09-08'),
+        sold:       Time.parse('2015-09-08').utc,
         title:      'War and Peace'
       )
     end
@@ -50,7 +59,7 @@ describe 'Lean::Attributes' do
     end
   end
 
-  describe 'Lean::Attributes::CoercionHelpers' do
+  describe 'coercion' do
     it 'has coercible and writable attributes' do
       expect(book.authors).to match_array ['Leo Tolstoy']
       expect(book.format).to eq :paperback
@@ -60,6 +69,23 @@ describe 'Lean::Attributes' do
       expect(book.published.strftime('%Y-%m-%d')).to eq '1869-01-01'
       expect(book.sold.strftime('%Y-%m-%d')).to eq '2015-09-08'
       expect(book.title).to match 'War and Peace'
+    end
+
+    it 'methods can be overridden' do
+      klass =
+        Class.new do
+          include Lean::Attributes
+
+          attribute :amount, Integer
+
+          private
+
+          def coerce_amount(value)
+            value * 3
+          end
+        end
+
+      expect(klass.new(amount: 3).amount).to eq 9
     end
   end
 end

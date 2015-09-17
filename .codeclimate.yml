@@ -35,5 +35,6 @@ ratings:
 # exclude_paths key.
 
 exclude_paths:
+  - Gemfile
   - benchmarks/**/*
   - spec/**/*

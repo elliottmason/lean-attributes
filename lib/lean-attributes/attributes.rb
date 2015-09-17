@@ -61,7 +61,6 @@ module Lean
     def self.included(base)
       base.class_eval do
         include Basic
-        include CoercionHelpers
         include Initializer
       end
     end

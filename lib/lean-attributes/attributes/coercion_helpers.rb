@@ -5,69 +5,28 @@ module Lean
     # depending on your use case.
     #
     # @since 0.1.0
+    # @api private
     module CoercionHelpers
-      # Coerce a value to an Array
-      #
-      # @param [Object] value
-      # @return [Array] coerced value
-      def coerce_to_array(value)
-        Array(value) unless value.nil?
-      end
+      METHOD_BODIES = {
+        Array:        'Array(value)',
+        BigDecimal:   'BigDecimal.new(value, 0)',
+        Date:         'Date.parse(value)',
+        DateTime:     'DateTime.parse(value)',
+        Float:        'value.to_f',
+        Integer:      'value.to_i',
+        String:       'value.to_s',
+        Symbol:       'value.to_s.to_sym',
+        Time:         'Time.parse(value).utc'
+      }
 
-      # Coerce a value to a BigDecimal
+      # Fetches or generates the method body for coercing a value to this type
       #
-      # @param [Object] value value to coerce
-      # @return [BigDecimal] coerced value
-      def coerce_to_bigdecimal(value)
-        BigDecimal.new(value, 0) unless value.nil?
-      end
-
-      # Coerce a value to a Date
+      # @param [Symbol] type based on class name e.g. `:DateTime`
+      # @return [String] method body for coercion to type
       #
-      # @param [Object] value value to coerce
-      # @return [Date] coerced value
-      def coerce_to_date(value)
-        Date.parse(value) unless value.nil?
-      end
-
-      # Coerce a value to a DateTime
-      #
-      # @param [Object] value value to coerce
-      # @return [DateTime] coerced value
-      def coerce_to_datetime(value)
-        DateTime.parse(value) unless value.nil?
-      end
-
-      # Coerce a value to an Integer
-      #
-      # @param [Object] value value to coerce
-      # @return [Fixnum] coerced value
-      def coerce_to_integer(value)
-        value.to_i unless value.nil?
-      end
-
-      # Coerce a value to a String
-      #
-      # @param [Object] value value to coerce
-      # @return [String] coerced value
-      def coerce_to_string(value)
-        value.to_s unless value.nil?
-      end
-
-      # Coerce a value to a Symbol
-      #
-      # @param [Object] value value to coerce
-      # @return [Symbol] coerced value
-      def coerce_to_symbol(value)
-        value.to_sym unless value.nil?
-      end
-
-      # Coerce a value to a Time
-      #
-      # @param [Object] value value to coerce
-      # @return [Time] coerced value
-      def coerce_to_time(value)
-        Time.parse(value) unless value.nil?
+      # @since 0.1.1
+      def self.method_body_for_type(type)
+        METHOD_BODIES[type] || "#{type}.new(value)"
       end
     end
   end

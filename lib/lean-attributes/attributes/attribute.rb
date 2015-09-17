@@ -38,22 +38,19 @@ module Lean
       # @see #coercion_method_name
       def coercion_method
         <<-EOS
-          def #{coercion_method_name(name)}(value)
-            #{coercion_method_name}(value)
+          def coerce_#{name}(value)
+            #{CoercionHelpers.method_body_for_type(@type)} unless value.nil?
           end
         EOS
       end
 
-      # Generates a method with a name `coerce_to_<type>`, or
-      # `coerce_<attribute>_to_<type>` if an argument is provided.
+      # Generates a method with a name `coerce_<attribute>`.
       #
-      # @param [#to_s] from {Lean::Attributes::Attribute#name name} of the
-      #   attribute being coerced
       # @return [String] method name
       #
       # @see #coercion_method
-      def coercion_method_name(from = nil)
-        ['coerce', from, 'to', @type.to_s.downcase].compact.join('_')
+      def coercion_method_name
+        "coerce_#{name}"
       end
 
       # If the configured default is a Symbol but the intended type for this
@@ -84,13 +81,13 @@ module Lean
       #     attribute :author,        String
       #     attribute :replies_count, Integer, default: 0
       #
-      #     # generated attr_reader
-      #     attr_reader :author
+      #     # generated attr_reader:
+      #     # attr_reader :author
       #
       #     # generated getter with default
-      #     def replies_count
-      #       @replies_count ||= 0
-      #     end
+      #     # def replies_count
+      #     #  @replies_count ||= 0
+      #     # end
       #   end
       #
       # @return [String] description of returned object
@@ -111,14 +108,14 @@ module Lean
       #     attribute :created_at,    Time,     default: :default_created_at
       #     attribute :replies_count, Integer,  default: 0
       #
-      #     # generated methods
-      #     def created_at
-      #       @first_name ||= send(:default_created_at)
-      #     end
+      #     # generated methods:
+      #     # def created_at
+      #     #   @first_name ||= send(:default_created_at)
+      #     # end
       #
-      #     def replies_count
-      #       @replies_count ||= 0
-      #     end
+      #     # def replies_count
+      #     #   @replies_count ||= 0
+      #     # end
       #   end
       #
       # @return [String] method definition that sets default
@@ -142,18 +139,18 @@ module Lean
       #
       #     attribute :pages, Integer
       #
-      #     # generated method
-      #     def pages=(value)
-      #       value = coerce_pages_to_integer(value) unless value.is_a?(Integer)
-      #       @pages = value
-      #     end
+      #     # generated method:
+      #     # def pages=(value)
+      #     #  value = coerce_pages(value) unless value.nil? || value.is_a?(Integer)
+      #     #  @pages = value
+      #     # end
       #   end
       #
       # @return [String] method definition
       def setter_method
         <<-EOS
           def #{name}=(value)
-            value = #{coercion_method_name}(value) unless value.is_a?(#{@type})
+            value = #{coercion_method_name}(value)
             @#{name} = value
           end
         EOS

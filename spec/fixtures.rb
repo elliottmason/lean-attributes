@@ -27,15 +27,33 @@ class Author
   attribute :name, String
 end
 
+class PageNumber
+  def initialize(value)
+    @value = value
+  end
+
+  def value=(value)
+    value = value.to_i
+    value = 1 if value < 1
+    @value = value
+  end
+
+  def inspect
+    @value.inspect
+  end
+end
+
 class ReadingProgress
   include Lean::Attributes
 
-  attribute :date,        Time,     default: :time_now
-  attribute :page,        Integer,  default: 1
-  attribute :percentage,  Float,    default: 0.0
-  attribute :status,      Symbol,   default: :unread
+  attribute :date,        Time,       default: :time_now
+  attribute :page,        PageNumber, default: 1
+  attribute :percentage,  Float,      default: 0.0
+  attribute :status,      Symbol,     default: :unread
+
+  private
 
   def time_now
-    Time.new('2015-09-08').utc
+    Time.parse('2015-09-08').utc
   end
 end
