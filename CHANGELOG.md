@@ -8,8 +8,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Adds .defined_attributes method to return an array of a class's attribute names
 - Adds #attributes method to return attribute values as a hash
 
+## Changed
+- Renames generated coercion methods from `coerce_<attribute>_to_<type>` to `coerce_<attribute>`
+- `Lean::Attribute::CoercionHelpers` is no longer an included module but a utility for compiling coercion methods
+
 ### Fixed
 - Fixes a bug where Time attributes would be improperly parsed to January 1st
+- Fixes a bug where coercion methods were not being called as documented
 
 ## [0.1.0] - 2015-09-09
 ### Changed

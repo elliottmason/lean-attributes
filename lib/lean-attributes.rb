@@ -1,5 +1,5 @@
 require 'lean-attributes/attributes'
 
-# Lean namespace
+# `Lean` namespace
 module Lean
 end

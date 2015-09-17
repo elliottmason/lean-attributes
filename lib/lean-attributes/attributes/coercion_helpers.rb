@@ -24,7 +24,7 @@ module Lean
       # @param [Symbol] type based on class name e.g. `:DateTime`
       # @return [String] method body for coercion to type
       #
-      # @since 0.1.1
+      # @since 0.2.0
       def self.method_body_for_type(type)
         METHOD_BODIES[type] || "#{type}.new(value)"
       end

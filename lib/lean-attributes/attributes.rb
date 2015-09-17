@@ -20,9 +20,7 @@ module Lean
     # @see Lean::Attributes
     # @see Lean::Attributes::ClassMethods
     module Basic
-      # `include Lean::Attributes::Basic` adds only `attribute` definition to
-      # your classes. This means initialization with a hash and coerction of
-      # attributes is not provided.
+      # Adds `.attribute` definition only
       #
       # @since 0.1.0
       # @api private
@@ -38,7 +36,7 @@ module Lean
       #
       # @return [Hash] defined attributes and their values
       #
-      # @since 0.1.1
+      # @since 0.2.0
       # @api public
       def attributes
         @attributes ||=
@@ -49,14 +47,13 @@ module Lean
     end
 
     # `include Lean::Attributes` will add {Basic} functionality, in addition
-    # to {CoercionHelpers} and {Initializer}
+    # to {Initializer}
     #
     # @since 0.1.0
     # @api private
     #
     # @see Basic
     # @see ClassMethods
-    # @see CoercionHelpers
     # @see Initializer
     def self.included(base)
       base.class_eval do

@@ -7,6 +7,7 @@ module Lean
     # @api private
     #
     # @see Lean::Attributes::ClassMethods#attribute
+    # @see Lean::Attributes::CoercinHelpers
     class Attribute
       # @return [Symbol] name of the Attribute
       attr_reader :name
@@ -29,13 +30,29 @@ module Lean
       end
 
       # Generates a method definition as a String with the name
-      # `coerce_<attribute>_to_<type>` that calls another generated method
-      # with the name `coerce_to_<type>`. This method gets appended to the
-      # class that defined this {Attribute Attribute}.
+      # `coerce_<attribute>`.
+      #
+      # @example
+      #   class Post
+      #     include Lean::Attributes
+      #
+      #     attribute :author, String
+      #     attribute :parent, Post
+      #
+      #     # generated_methods:
+      #     # def coerce_author(value)
+      #     #   value.to_s unless value.nil?
+      #     # end
+      #
+      #     # def coerce_parent(value)
+      #     #   Post.new(value) unless value.nil?
+      #     # end
+      #   end
       #
       # @return [String] method definition
       #
       # @see #coercion_method_name
+      # @see CoercionHelpers
       def coercion_method
         <<-EOS
           def coerce_#{name}(value)
@@ -141,7 +158,7 @@ module Lean
       #
       #     # generated method:
       #     # def pages=(value)
-      #     #  value = coerce_pages(value) unless value.nil? || value.is_a?(Integer)
+      #     #  value = coerce_pages(value)
       #     #  @pages = value
       #     # end
       #   end
