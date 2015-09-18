@@ -33,7 +33,7 @@ module Lean
 
       # @return [Array<Symbol>] names of defined attributes
       #
-      # @since 0.1.1
+      # @since 0.2.0
       # @api private
       def defined_attributes
         return @defined_attributes if @defined_attributes

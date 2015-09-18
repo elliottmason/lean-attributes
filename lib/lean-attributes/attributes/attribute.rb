@@ -7,7 +7,6 @@ module Lean
     # @api private
     #
     # @see Lean::Attributes::ClassMethods#attribute
-    # @see Lean::Attributes::CoercinHelpers
     class Attribute
       # @return [Symbol] name of the Attribute
       attr_reader :name
