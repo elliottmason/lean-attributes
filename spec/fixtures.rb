@@ -14,8 +14,6 @@ class Medium
 end
 
 class Book < Medium
-  include Lean::Attributes::CoercionHelpers
-
   attribute :format,  Symbol, default: :hardcover
   attribute :pages,   Integer
 end
