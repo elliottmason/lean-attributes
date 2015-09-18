@@ -3,14 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+
+## [0.2.0] - 2015-09-18
 ### Added
+- Adds content to README.md
 - Adds comprehensive YARD documentation
-- Adds .defined_attributes method to return an array of a class's attribute names
 - Adds #attributes method to return attribute values as a hash
 
 ## Changed
 - Renames generated coercion methods from `coerce_<attribute>_to_<type>` to `coerce_<attribute>`
-- `Lean::Attribute::CoercionHelpers` is no longer an included module but a utility for compiling coercion methods
+- `Lean::Attribute::CoercionHelpers` is no longer an included module but a utility for precompiling coercion methods
 
 ### Fixed
 - Fixes a bug where Time attributes would be improperly parsed to January 1st

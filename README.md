@@ -13,7 +13,7 @@ Lean::Attributes is inspired by gems like [Virtus](https://github.com/solnic/vir
 ## Installation
 Add this line to your Gemfile:
 ```ruby
-gem 'lean-attributes', '~> 0.1'
+gem 'lean-attributes', '~> 0.2'
 ```
 
 And then execute:
@@ -76,18 +76,18 @@ The coercion capabilities included in this gem are poor by design and will only 
 ```ruby
 class ReadingProgress
   include Lean::Attributes
-  
+
   attribute :current_page, Integer, default: 1
-  
+
   private
-  
+
   def coerce_current_page(value)
     value = begin
       value.to_i
     rescue NoMethodError
       1
     end
-    
+
     value = 1 if value < 1
     value
   end
