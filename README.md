@@ -92,6 +92,9 @@ class ReadingProgress
     value
   end
 end
+
+# progress = ReadingProgress.new(current_page: 0)
+# progress.current_page # => 1
 ```
 
 Another way to contain such behavior is to create a `CurrentPage` class to represent your attribute instead of an Integer. The power is yours.
