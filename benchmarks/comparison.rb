@@ -1,4 +1,5 @@
 require 'active_attr'
+require 'active_record'
 require 'attrio'
 require 'benchmark/ips'
 require 'fast_attributes'
@@ -13,6 +14,17 @@ class ActiveAttrIntegers
 
   ATTR_NAMES.each do |name|
     attribute name, type: Integer
+  end
+end
+
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3',
+                                        database: 'ar_benchmark')
+ActiveRecord::Base.connection.drop_table('active_record_integers') rescue false
+ActiveRecord::Base.connection.create_table('active_record_integers')
+
+class ActiveRecordIntegers < ActiveRecord::Base
+  ATTR_NAMES.each do |name|
+    attribute name, :integer
   end
 end
 
@@ -68,6 +80,10 @@ Benchmark.ips do |x|
   x.report('ActiveAttr: without values                              ') { ActiveAttrIntegers.new }
   x.report('ActiveAttr: integer values for integer attributes       ') { ActiveAttrIntegers.new(integers) }
   x.report('ActiveAttr: string values for integer attributes        ') { ActiveAttrIntegers.new(strings) }
+
+  x.report('ActiveRecord: without values                            ') { ActiveRecordIntegers.new }
+  x.report('ActiveRecord: integer values for integer attributes     ') { ActiveRecordIntegers.new(integers) }
+  x.report('ActiveRecord: string values for integer attributes      ') { ActiveRecordIntegers.new(strings) }
 
   x.report('Attrio: without values                                  ') { AttrioIntegers.new }
   x.report('Attrio: integer values for integer attributes           ') { AttrioIntegers.new(integers) }

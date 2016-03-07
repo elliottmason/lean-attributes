@@ -103,21 +103,24 @@ Another way to contain such behavior is to create a `CurrentPage` class to repre
 Lean::Attributes is meant to be relatively lightweight and fast.
 
 ```
-Lean::Attributes: without values                        :  3578400.9 i/s
-FastAttributes: without values                          :  3550627.8 i/s - 1.01x slower
-ActiveAttr: without values                              :  1716021.2 i/s - 2.09x slower
-Lean::Attributes: integer values for integer attributes :   163629.8 i/s - 21.87x slower
-Lean::Attributes: string values for integer attributes  :   146600.1 i/s - 24.41x slower
-FastAttributes: integer values for integer attributes   :   139910.9 i/s - 25.58x slower
-FastAttributes: string values for integer attributes    :   122144.8 i/s - 29.30x slower
-Virtus: integer values for integer attributes           :    35806.3 i/s - 99.94x slower
-ActiveAttr: integer values for integer attributes       :    26185.2 i/s - 136.66x slower
-ActiveAttr: string values for integer attributes        :    25881.3 i/s - 138.26x slower
-Virtus: without values                                  :    18896.1 i/s - 189.37x slower
-Attrio: integer values for integer attributes           :    18792.1 i/s - 190.42x slower
-Attrio: string values for integer attributes            :    17161.8 i/s - 208.51x slower
-Attrio: without values                                  :    12286.8 i/s - 291.24x slower
-Virtus: string values for integer attributes            :     4444.8 i/s - 805.07x slower
+Lean::Attributes: without values                        :  3119783.8 i/s
+FastAttributes: without values                          :  3055309.1 i/s - 1.02x slower
+ActiveAttr: without values                              :  1554020.1 i/s - 2.01x slower
+Lean::Attributes: integer values for integer attributes :   153202.6 i/s - 20.36x slower
+Lean::Attributes: string values for integer attributes  :   141380.5 i/s - 22.07x slower
+FastAttributes: integer values for integer attributes   :   121248.2 i/s - 25.73x slower
+FastAttributes: string values for integer attributes    :   116990.4 i/s - 26.67x slower
+Virtus: integer values for integer attributes           :    35510.1 i/s - 87.86x slower
+ActiveRecord: without values                            :    33943.3 i/s - 91.91x slower
+ActiveAttr: integer values for integer attributes       :    23016.1 i/s - 135.55x slower
+ActiveAttr: string values for integer attributes        :    22838.5 i/s - 136.60x slower
+Virtus: without values                                  :    17894.9 i/s - 174.34x slower
+Attrio: integer values for integer attributes           :    16326.6 i/s - 191.09x slower
+Attrio: string values for integer attributes            :    15921.3 i/s - 195.95x slower
+ActiveRecord: string values for integer attributes      :    13286.4 i/s - 234.81x slower
+ActiveRecord: integer values for integer attributes     :    12595.4 i/s - 247.69x slower
+Attrio: without values                                  :    11723.0 i/s - 266.13x slower
+Virtus: string values for integer attributes            :     4925.7 i/s - 633.36x slower
 ```
 
 ## Versioning
