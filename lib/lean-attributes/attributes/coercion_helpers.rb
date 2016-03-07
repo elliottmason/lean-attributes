@@ -16,6 +16,7 @@ module Lean
       METHOD_BODIES = {
         Array:      'Array(value)',
         BigDecimal: 'BigDecimal.new(value, 0)',
+        Boolean:    'value ? true : false',
         Date:       'Date.parse(value)',
         DateTime:   'DateTime.parse(value)',
         Float:      'value.to_f',
@@ -23,7 +24,7 @@ module Lean
         String:     'value.to_s',
         Symbol:     'value.to_s.to_sym',
         Time:       'Time.parse(value).utc'
-      }
+      }.freeze
 
       # Fetches or generates the method body for coercing a value to this type
       #

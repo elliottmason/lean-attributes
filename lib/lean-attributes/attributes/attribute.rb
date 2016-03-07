@@ -157,8 +157,7 @@ module Lean
       #
       #     # generated method:
       #     # def pages=(value)
-      #     #  value = coerce_pages(value)
-      #     #  @pages = value
+      #     #   @pages = coerce_pages(value)
       #     # end
       #   end
       #
@@ -166,8 +165,7 @@ module Lean
       def setter_method
         <<-EOS
           def #{name}=(value)
-            value = #{coercion_method_name}(value)
-            @#{name} = value
+            @#{name} = #{coercion_method_name}(value)
           end
         EOS
       end

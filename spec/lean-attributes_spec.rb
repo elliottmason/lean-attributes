@@ -4,15 +4,16 @@ describe 'Lean::Attributes' do
   let(:author) { Author.new(name: 'Leo Tolstoy', age: nil) }
   let(:book) do
     Book.new.tap do |book|
-      book.authors    = 'Leo Tolstoy'
-      book.edition    = :first
-      book.finished   = '2015-09-10'
-      book.format     = 'paperback'
-      book.pages      = '1'
-      book.price      = 10.00
-      book.published  = '1869-01-01'
-      book.sold       = '2015-09-08'
-      book.title      = 'War and Peace'
+      book.authors        = 'Leo Tolstoy'
+      book.edition        = :first
+      book.finished       = '2015-09-10'
+      book.format         = 'paperback'
+      book.pages          = '1'
+      book.price          = 10.00
+      book.public_domain  = true
+      book.published      = '1869-01-01'
+      book.sold           = '2015-09-08'
+      book.title          = 'War and Peace'
     end
   end
 
@@ -31,16 +32,17 @@ describe 'Lean::Attributes' do
   describe '#attributes' do
     it 'returns all attributes as a Hash' do
       expect(book.attributes).to match(
-        authors:    ['Leo Tolstoy'],
-        edition:    'first',
-        finished:   DateTime.parse('2015-09-10'),
-        format:     :paperback,
-        pages:      1,
-        price:      BigDecimal.new(10, 0),
-        published:  Date.parse('1869-01-01'),
-        rate:       nil,
-        sold:       Time.parse('2015-09-08').utc,
-        title:      'War and Peace'
+        authors:        ['Leo Tolstoy'],
+        edition:        'first',
+        finished:       DateTime.parse('2015-09-10'),
+        format:         :paperback,
+        pages:          1,
+        price:          BigDecimal.new(10, 0),
+        public_domain:  true,
+        published:      Date.parse('1869-01-01'),
+        rate:           nil,
+        sold:           Time.parse('2015-09-08').utc,
+        title:          'War and Peace'
       )
     end
   end

@@ -3,19 +3,20 @@ require 'bigdecimal'
 class Medium
   include Lean::Attributes::Basic
 
-  attribute :authors,   Array
-  attribute :edition,   String
-  attribute :finished,  DateTime
-  attribute :price,     BigDecimal
-  attribute :published, Date
-  attribute :rate,      Float
-  attribute :sold,      Time
-  attribute :title,     String
+  attribute :authors,       Array
+  attribute :edition,       String
+  attribute :finished,      DateTime
+  attribute :price,         BigDecimal
+  attribute :public_domain, :Boolean, default: false
+  attribute :published,     Date
+  attribute :rate,          Float
+  attribute :sold,          Time
+  attribute :title,         String
 end
 
 class Book < Medium
-  attribute :format,  Symbol, default: :hardcover
-  attribute :pages,   Integer
+  attribute :format,      Symbol, default: :hardcover
+  attribute :pages,       Integer
 end
 
 class Author
