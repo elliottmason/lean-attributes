@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
-- Adds a benchmark for ActiveAttr
+- Adds benchmarks for ActiveAttr
+- Adds benchmarks for ActiveRecord::Attributes
+- Adds basic support for boolean attributes
 
 ## [0.2.0] - 2015-09-18
 ### Added
