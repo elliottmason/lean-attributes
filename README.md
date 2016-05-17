@@ -3,12 +3,12 @@
 Lean::Attributes is inspired by gems like [Virtus](https://github.com/solnic/virtus) or [FastAttributes](https://github.com/applift/fast_attributes). It allows one to define typed attributes on arbitrary Ruby classes. Lean::Attributes aims to be roughly as fast as FastAttributes but has a few syntactical differences in addition to support for default values.
 
 ## Status
-[![Gem Version](https://badge.fury.io/rb/lean-attributes.svg)](http://badge.fury.io/rb/lean-attributes)
+[![Gem Version](https://badge.fury.io/rb/lean-attributes.svg)](https://badge.fury.io/rb/lean-attributes)
 [![Build Status](https://travis-ci.org/lleolin/lean-attributes.svg)](https://travis-ci.org/lleolin/lean-attributes)
 [![Test Coverage](https://codeclimate.com/github/lleolin/lean-attributes/badges/coverage.svg)](https://codeclimate.com/github/lleolin/lean-attributes/coverage)
 [![Code Climate](https://codeclimate.com/github/lleolin/lean-attributes/badges/gpa.svg)](https://codeclimate.com/github/lleolin/lean-attributes)
 [![Dependency Status](https://gemnasium.com/lleolin/lean-attributes.svg)](https://gemnasium.com/lleolin/lean-attributes)
-[![Inline docs](http://inch-ci.org/github/lleolin/lean-attributes.svg?branch=master)](http://inch-ci.org/github/lleolin/lean-attributes)
+[![Inline docs](https://inch-ci.org/github/lleolin/lean-attributes.svg?branch=master)](https://inch-ci.org/github/lleolin/lean-attributes)
 
 ## Installation
 Add this line to your Gemfile:
