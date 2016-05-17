@@ -28,11 +28,10 @@ end
 
 class PageNumber
   def initialize(value)
-    @value = value
+    @value = value.to_i
   end
 
   def value=(value)
-    value = value.to_i
     value = 1 if value < 1
     @value = value
   end

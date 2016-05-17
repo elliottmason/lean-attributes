@@ -35,7 +35,8 @@ module Lean
       #
       # @see Attribute#coercion_method
       def self.method_body_for_type(type)
-        METHOD_BODIES[type] || "#{type}.new(value)"
+        METHOD_BODIES[type] ||
+          "value.is_a?(#{type}) ? value : #{type}.new(value)"
       end
     end
   end

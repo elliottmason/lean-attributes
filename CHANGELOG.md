@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Fixed
+- Fixes a bug where values for custom types would be unnecessarily coerced irrespective of whether they were already of the expected type or not
 
 ## [0.3.0] - 2016-03-07
 ### Added

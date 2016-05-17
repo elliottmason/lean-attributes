@@ -56,7 +56,7 @@ describe 'Lean::Attributes' do
   end
 
   describe 'Lean::Attributes::Basic' do
-    it 'has no initializer'  do
+    it 'has no initializer' do
       expect { Book.new(title: 'War and Peace') }.to raise_error(ArgumentError)
     end
   end
@@ -71,6 +71,11 @@ describe 'Lean::Attributes' do
       expect(book.published.strftime('%Y-%m-%d')).to eq '1869-01-01'
       expect(book.sold.strftime('%Y-%m-%d')).to eq '2015-09-08'
       expect(book.title).to match 'War and Peace'
+    end
+
+    it 'only occurs when value type is not expected' do
+      expect { ReadingProgress.new(page: PageNumber.new(5)).page }
+        .to_not raise_exception
     end
 
     it 'methods can be overridden' do
