@@ -13,7 +13,7 @@ Lean::Attributes is inspired by gems like [Virtus](https://github.com/solnic/vir
 ## Installation
 Add this line to your Gemfile:
 ```ruby
-gem 'lean-attributes', '~> 0.2'
+gem 'lean-attributes', '~> 0.3'
 ```
 
 And then execute:
