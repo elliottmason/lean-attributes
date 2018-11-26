@@ -4,11 +4,11 @@ Lean::Attributes is inspired by gems like [Virtus](https://github.com/solnic/vir
 
 ## Status
 [![Gem Version](https://badge.fury.io/rb/lean-attributes.svg)](https://badge.fury.io/rb/lean-attributes)
-[![Build Status](https://travis-ci.org/lleolin/lean-attributes.svg)](https://travis-ci.org/lleolin/lean-attributes)
-[![Test Coverage](https://codeclimate.com/github/lleolin/lean-attributes/badges/coverage.svg)](https://codeclimate.com/github/lleolin/lean-attributes/coverage)
-[![Code Climate](https://codeclimate.com/github/lleolin/lean-attributes/badges/gpa.svg)](https://codeclimate.com/github/lleolin/lean-attributes)
-[![Dependency Status](https://gemnasium.com/lleolin/lean-attributes.svg)](https://gemnasium.com/lleolin/lean-attributes)
-[![Inline docs](https://inch-ci.org/github/lleolin/lean-attributes.svg?branch=master)](https://inch-ci.org/github/lleolin/lean-attributes)
+[![Build Status](https://travis-ci.org/elliottmason/lean-attributes.svg)](https://travis-ci.org/elliottmason/lean-attributes)
+[![Test Coverage](https://codeclimate.com/github/elliottmason/lean-attributes/badges/coverage.svg)](https://codeclimate.com/github/elliottmason/lean-attributes/coverage)
+[![Code Climate](https://codeclimate.com/github/elliottmason/lean-attributes/badges/gpa.svg)](https://codeclimate.com/github/elliottmason/lean-attributes)
+[![Dependency Status](https://gemnasium.com/elliottmason/lean-attributes.svg)](https://gemnasium.com/elliottmason/lean-attributes)
+[![Inline docs](https://inch-ci.org/github/elliottmason/lean-attributes.svg?branch=master)](https://inch-ci.org/github/elliottmason/lean-attributes)
 
 ## Installation
 Add this line to your Gemfile:
@@ -127,7 +127,7 @@ Virtus: string values for integer attributes            :     4925.7 i/s - 633.3
 Lean:Attributes uses [Semantic Versioning 2.0.0](http://semver.org)
 
 ## Contributing
-1. Fork it ( https://github.com/lleolin/lean-attributes/fork )
+1. Fork it ( https://github.com/elliottmason/lean-attributes/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

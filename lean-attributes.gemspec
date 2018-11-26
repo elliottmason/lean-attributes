@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.3'
   s.rubygems_version = '>= 1.3.6'
 
-  s.homepage = 'https://github.com/lleolin/lean-attributes'
+  s.homepage = 'https://github.com/elliottmason/lean-attributes'
   s.authors = ['R. Elliott Mason']
   s.email = ['r.elliott.mason@fastmail.fm']
   s.summary = 'Lean attributes for Ruby classes'
