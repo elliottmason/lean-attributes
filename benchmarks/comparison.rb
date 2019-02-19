@@ -2,6 +2,8 @@ require 'active_attr'
 require 'active_record'
 require 'attrio'
 require 'benchmark/ips'
+require 'dry-struct'
+require 'dry-types'
 require 'fast_attributes'
 require 'lean-attributes'
 require 'virtus'
@@ -44,6 +46,17 @@ class AttrioIntegers
   end
 end
 
+module Types
+  include Dry::Types.module
+end
+
+
+class DryIntegers < Dry::Struct
+  ATTR_NAMES.each do |name|
+    attribute name, Types::Coercible::Integer
+  end
+end
+
 class FastIntegers
   extend FastAttributes
 
@@ -54,7 +67,6 @@ end
 
 class LeanIntegers
   include Lean::Attributes
-  include Lean::Attributes::Initializer
 
   ATTR_NAMES.each do |name|
     attribute name, Integer
@@ -88,6 +100,9 @@ Benchmark.ips do |x|
   x.report('Attrio: without values                                  ') { AttrioIntegers.new }
   x.report('Attrio: integer values for integer attributes           ') { AttrioIntegers.new(integers) }
   x.report('Attrio: string values for integer attributes            ') { AttrioIntegers.new(strings) }
+
+  x.report('dry-types: integer values for integer attributes        ') { DryIntegers.new(integers) }
+  x.report('dry-types: string values for integer attributes         ') { DryIntegers.new(strings) }
 
   x.report('FastAttributes: without values                          ') { FastIntegers.new }
   x.report('FastAttributes: integer values for integer attributes   ') { FastIntegers.new(integers) }
