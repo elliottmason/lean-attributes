@@ -1,6 +1,6 @@
 require 'lean-attributes/attributes/class_methods'
-require 'lean-attributes/attributes/coercion_helpers'
 require 'lean-attributes/attributes/initializer'
+require 'lean-attributes/attributes/type_coercion_method'
 
 module Lean
   # Allows one to define typed, coercible attributes on Ruby classes with

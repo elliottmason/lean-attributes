@@ -1,4 +1,5 @@
 require 'bigdecimal'
+require 'time'
 
 class Medium
   include Lean::Attributes::Basic
@@ -15,8 +16,8 @@ class Medium
 end
 
 class Book < Medium
-  attribute :format,      Symbol, default: :hardcover
-  attribute :pages,       Integer
+  attribute :format,  Symbol, default: :hardcover
+  attribute :pages,   Integer
 end
 
 class Author
@@ -27,31 +28,38 @@ class Author
 end
 
 class PageNumber
+  include Lean::Attributes::Basic
+
+  attribute :value, Integer
+
   def initialize(value)
-    @value = value.to_i
+    self.value = value
   end
 
-  def value=(value)
-    value = 1 if value < 1
-    @value = value
+  def ==(other)
+    case other
+    when self.class then value == other.value
+    when Integer then value == other
+    when String then value == other.to_i
+    end
   end
 
   def inspect
     @value.inspect
+  end
+
+  def value=(value)
+    @value = coerce_value(value)
+    @value = 1 if @value < 1
+    @value
   end
 end
 
 class ReadingProgress
   include Lean::Attributes
 
-  attribute :date,        Time,       default: :time_now
-  attribute :page,        PageNumber, default: 1
+  attribute :date,        Time,       default: ->{ Time.now }
+  attribute :page,        PageNumber, default: PageNumber.new(1)
   attribute :percentage,  Float,      default: 0.0
   attribute :status,      Symbol,     default: :unread
-
-  private
-
-  def time_now
-    Time.parse('2015-09-08').utc
-  end
 end
