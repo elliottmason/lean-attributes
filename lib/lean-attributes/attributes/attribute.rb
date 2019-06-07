@@ -177,11 +177,11 @@ module Lean
       #
       # @see #coercion_method_name
       def setter_method
-        <<-EOS
+        <<-RUBY
           def #{name}=(value)
             @#{name} = #{coercion_method_name}(value)
           end
-        EOS
+        RUBY
       end
     end
   end
