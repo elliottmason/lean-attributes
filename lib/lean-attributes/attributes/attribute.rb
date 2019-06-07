@@ -151,9 +151,9 @@ module Lean
       def getter_method_with_default_body
         case @default
         when Proc
-          %[@#{name} ||= self.class.attribute_defaults[:#{name}].call]
+          %(@#{name} ||= self.class.attribute_defaults[:#{name}].call)
         else
-          %[@#{name} ||= self.class.attribute_defaults[:#{name}]]
+          %(@#{name} ||= self.class.attribute_defaults[:#{name}])
         end
       end
 
