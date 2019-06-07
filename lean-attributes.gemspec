@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.authors = ['R. Elliott Mason']
   s.email = ['r.elliott.mason@fastmail.fm']
   s.summary = 'Lean attributes for Ruby classes'
-  s.description = <<-desc
+  s.description = <<-DESC
 lean-attributes allows you to define typed attributes for Ruby classes
-desc
+DESC
 
   s.licenses = ['MIT']
 
