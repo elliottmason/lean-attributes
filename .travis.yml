@@ -1,19 +1,22 @@
 rvm:
-- 2.0.0
-- 2.1
-- 2.2
-- ruby-head
-- rbx-2
+  - 2.0.0
+  - 2.1
+  - 2.2
+  - 2.3
+  - 2.4
+  - 2.6
+  - ruby-head
+  - rbx-2
 matrix:
   allow_failures:
-  - rvm: jruby-head
-  - rvm: rbx-2
-  - rvm: ruby-head
+    - rvm: jruby-head
+    - rvm: rbx-2
+    - rvm: ruby-head
   include:
-  - rvm: jruby
-    env: JRUBY_OPTS="--2.0"
-  - rvm: jruby-head
-    env: JRUBY_OPTS="--2.1"
+    - rvm: jruby
+      env: JRUBY_OPTS="--2.0"
+    - rvm: jruby-head
+      env: JRUBY_OPTS="--2.1"
 env:
   global:
     secure: EXFzGCqzWdi4KrYvtK2L+TFtpV42t8xQTdFCLIAQIxZJBH+0jNR0ylGE3MTEzNOa/LmWGFroqGY1vV6h/Mopb6FF+F2xeaq8zdzKICjaAnxJA4bELqjyMrKvSJHs4F1KxoJgh2JbNrhHVuL8F6ZUni5MfxOwd1gMHq2Tpgl13wsKOfv2zoI8cSULbMZr4Nqaxm6YBW+T5y+OMRmF4+NqxFBkQFwhOJm1e2O8St4dPD4SngFF/sETLxrDvc9eR7WKZ0PZvsMUjTjbXmp4eV3H/SSTCdwS70e3nEm4nFSNRLLgnP71AnXA1qANH6Q2gh0Tp6OiBlvzVbFxPekO5X4FQZkYcuIMeiDwXDcfVlo8gMAYi/eZfgzYM/9zkLIQS+Zs0nplr66Nt7AIcPIySwCtblnyQLiaMFli9C3BEwqthtzWmVQkhb5A9klLDtTHZIsULij1jF7nP8SdMXUOdLwElLaDVxdEvN8J1Sl3fDNdfvZh3Lw+VPMSfxy0LZ8o/rMh2A10SIAJAVQ+nzwDfg8hoJK8O7jS0ljoUoFJ8V6J6K7EeIJgCCaCZAjZpZ5Ca1SptFw8pVmy0SFAcxJ39Jw7o+BqXK8zhmd4NgNV5G7wkrQBm/dllz2Znm5jvooz42zOoi750cQk/PVB9aitwGnBTzYJwzO8ZxSyw8FKNZmZw8g=

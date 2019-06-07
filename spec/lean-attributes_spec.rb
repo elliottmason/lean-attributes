@@ -20,13 +20,11 @@ describe 'Lean::Attributes' do
   it { expect(author.age).to be_nil }
   it { expect(author.name).to match 'Leo Tolstoy' }
 
-  it { expect(book).to respond_to :coerce_authors }
-  it { expect(author).to respond_to :coerce_age }
-
   describe 'generated methods' do
     it { expect(author).to respond_to :age }
     it { expect(author).to respond_to :age= }
     it { expect(author).to respond_to :coerce_age }
+    it { expect(author).to respond_to :coerce_integer_attribute }
   end
 
   describe '#attributes' do
@@ -37,7 +35,7 @@ describe 'Lean::Attributes' do
         finished:       DateTime.parse('2015-09-10'),
         format:         :paperback,
         pages:          1,
-        price:          BigDecimal.new(10, 0),
+        price:          BigDecimal(10, 0),
         public_domain:  true,
         published:      Date.parse('1869-01-01'),
         rate:           nil,
@@ -50,9 +48,19 @@ describe 'Lean::Attributes' do
   context 'attributes have defaults' do
     let(:reading_progress) { ReadingProgress.new(page: nil) }
 
-    it { expect(reading_progress.date).to be_kind_of Time }
+    it do
+      allow(Time).to receive(:now).and_return(Time.parse('2015-09-08'))
+      expect(reading_progress.date).to eq Time.now
+    end
     it { expect(reading_progress.page).to eq 1 }
     it { expect(reading_progress.status).to eq :unread }
+  end
+
+  context 'attributes use custom classes for special behavior' do
+    let(:reading_progress) { ReadingProgress.new(page: 0) }
+
+    it { expect(reading_progress.page).to be_kind_of PageNumber }
+    it { expect(reading_progress.page).to eq '1' }
   end
 
   describe 'Lean::Attributes::Basic' do
@@ -78,6 +86,10 @@ describe 'Lean::Attributes' do
         .to_not raise_exception
     end
 
+    it 'coerces defaults if necessary?' do
+      expect(ReadingProgress.new(page: 1).page).to be_kind_of PageNumber
+    end
+
     it 'methods can be overridden' do
       klass =
         Class.new do
@@ -88,11 +100,15 @@ describe 'Lean::Attributes' do
           private
 
           def coerce_amount(value)
-            value * 3
+            coerce_integer(value) * 3
+          end
+
+          def coerce_integer(value)
+            value.to_i
           end
         end
 
-      expect(klass.new(amount: 3).amount).to eq 9
+      expect(klass.new(amount: '3').amount).to eq 9
     end
   end
 end

@@ -1,25 +1,33 @@
 module Lean
   module Attributes
     # Represents an attribute defined by
-    # {Lean::Attributes::ClassMethods#attribute}
+    # {ClassMethods#attribute}
     #
     # @since 0.0.1
     # @api private
     #
-    # @see Lean::Attributes::ClassMethods#attribute
+    # @see ClassMethods#attribute
     class Attribute
+      # @return [Object] default value for this Attribute
+      attr_reader :default
+
       # @return [Symbol] name of the Attribute
       attr_reader :name
+
+      # @return [Symbol] class name of the Attribute type
+      attr_reader :type
 
       # Description of method
       #
       # @param [Hash] options = {} describe options = {}
-      # @option options [Object] :default default value or method name as a
-      #   Symbol
+      # @option options [Object] :default default value or a Proc to `call` to
+      #                                   generate one
       # @option options [#to_sym] :name attribute name
       # @option options [#to_s] :type class or class name that the attribute
       #   will be
       # @return [Attribute] description of returned object
+      #
+      # @since 0.4.0
       #
       # @see Lean::Attributes::ClassMethods#attribute
       def initialize(options = {})
@@ -40,24 +48,24 @@ module Lean
       #
       #     # generated_methods:
       #     # def coerce_author(value)
-      #     #   value.to_s unless value.nil?
+      #     #   coerce_string(value)
       #     # end
       #
       #     # def coerce_parent(value)
-      #     #   Post.new(value) unless value.nil?
+      #     #   coerce_post(value)
       #     # end
       #   end
       #
       # @return [String] method definition
       #
       # @see #coercion_method_name
-      # @see CoercionHelpers
+      # @see TypeCoercionMethod
       def coercion_method
-        <<-EOS
-          def coerce_#{name}(value)
-            #{CoercionHelpers.method_body_for_type(@type)} unless value.nil?
+        <<-RUBY
+          def #{coercion_method_name}(value)
+            #{TypeCoercionMethod.method_name(@type)}(value)
           end
-        EOS
+        RUBY
       end
 
       # Generates a method with a name `coerce_<attribute>`.
@@ -67,24 +75,6 @@ module Lean
       # @see #coercion_method
       def coercion_method_name
         "coerce_#{name}"
-      end
-
-      # If the configured default is a Symbol but the intended type for this
-      # attribute is anything but, interpret the default as a method name to
-      # which we will `send`. Otherwise, just use the configured default as a
-      # String.
-      #
-      # @return [Object] configured default
-      #
-      # @since 0.1.0
-      #
-      # @see #getter_method_with_default
-      def default
-        if @default.is_a?(Symbol) && @type != :Symbol
-          return "send(:#{@default})"
-        end
-
-        @default.inspect
       end
 
       # Generates a getter method definition if the Attribute has a default,
@@ -102,11 +92,12 @@ module Lean
       #
       #     # generated getter with default
       #     # def replies_count
-      #     #  @replies_count ||= 0
+      #     #  @replies_count ||= self.class.attribute_defaults[:replies_count]
       #     # end
       #   end
       #
-      # @return [String] description of returned object
+      # @return [String] `attr_reader` or getter method definition to inject
+      #                  into the class defining this attribute
       #
       # @see #getter_method_with_default
       def getter_method
@@ -134,16 +125,36 @@ module Lean
       #     # end
       #   end
       #
-      # @return [String] method definition that sets default
+      # @return [String] getter method definition that sets default when the
+      #                  attribute is value is nil
       #
       # @see #default
       # @see #getter_method
+      # @see getter_method_with_default_body
       def getter_method_with_default
-        <<-EOS
+        <<-RUBY
           def #{name}
-            @#{name} ||= #{default}
+            #{getter_method_with_default_body}
           end
-        EOS
+        RUBY
+      end
+
+      # Returns a method body that sets the attribute to the configured default
+      # value, or the value resultant from `call`ing the default value Proc
+      #
+      # @return [String] the body for the getter method
+      #
+      # @since 0.4.0
+      #
+      # @see #getter_method
+      # @see #getter_method_with_default
+      def getter_method_with_default_body
+        case @default
+        when Proc
+          %[@#{name} ||= self.class.attribute_defaults[:#{name}].call]
+        else
+          %[@#{name} ||= self.class.attribute_defaults[:#{name}]]
+        end
       end
 
       # Generates a setter method definition that coerces values to the
@@ -161,7 +172,10 @@ module Lean
       #     # end
       #   end
       #
-      # @return [String] method definition
+      # @return [String] method definition that sets the attribute to the given
+      #                  value after coercion
+      #
+      # @see #coercion_method_name
       def setter_method
         <<-EOS
           def #{name}=(value)
