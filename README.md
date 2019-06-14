@@ -8,7 +8,7 @@ Lean::Attributes is inspired by gems like [Virtus](https://github.com/solnic/vir
 [![Build Status](https://travis-ci.org/elliottmason/lean-attributes.svg)](https://travis-ci.org/elliottmason/lean-attributes)
 [![Test Coverage](https://codeclimate.com/github/elliottmason/lean-attributes/badges/coverage.svg)](https://codeclimate.com/github/elliottmason/lean-attributes/coverage)
 [![Code Climate](https://codeclimate.com/github/elliottmason/lean-attributes/badges/gpa.svg)](https://codeclimate.com/github/elliottmason/lean-attributes)
-[![Dependency Status](https://gemnasium.com/elliottmason/lean-attributes.svg)](https://gemnasium.com/elliottmason/lean-attributes)
+[![Depfu](https://badges.depfu.com/badges/67f305b49f8ef9c6cb2562bf358c7022/overview.svg)](https://depfu.com/github/elliottmason/lean-attributes?project_id=8302)
 [![Inline docs](https://inch-ci.org/github/elliottmason/lean-attributes.svg?branch=master)](https://inch-ci.org/github/elliottmason/lean-attributes)
 
 ## Installation
