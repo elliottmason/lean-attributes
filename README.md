@@ -40,15 +40,9 @@ class Book
   attribute :pages,     Integer
   attribute :authors,   Array
   attribute :published, Date
-  attribute :sold,      Time,     default: :time_now
+  attribute :sold,      Time,     default: ->{ Time.now }
   attribute :finished,  DateTime
   attribute :format,    Symbol,   default: :hardcover
-
-  private
-
-  def time_now
-    Time.now.utc
-  end
 end
 
 book = Book.new(
